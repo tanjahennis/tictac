@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { history } from '../store'
+import './Square.sass'
 
 class Square extends Component {
   render() {
     return (
-      // <button className="square">
-      //   {/* TODO */}
-      // </button>
-      <h1> TEST </h1>
-    )
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
+      </button>
+    );
   }
 }
 
-export
+export default Square
