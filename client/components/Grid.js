@@ -14,7 +14,6 @@ class Grid extends Component {
   handleClick(i) {
     const { hasTurn, game, playerSymbol, updateGame } = this.props
     // TODO: ignore if player not hasTurn
-    if (!hasTurn) { return }
     const squares = game.squares.slice(0, i)
       .concat(playerSymbol)
       .concat(game.squares.slice(i+1))
