@@ -9,8 +9,6 @@ import FlatButton from 'material-ui/FlatButton'
 import saveGame from '../actions/update-game'
 import './Game.sass'
 import GameModel from '../models/game-model'
-import Square from '../components/Square'
-import Grid from '../components/Grid'
 import TheGameModel from '../components/TheGameModel'
 
 const PLAYER_COLORS = ['#0f0', '#00f']
@@ -43,7 +41,7 @@ class Game extends Component {
   }
 
   render() {
-    const { game, gameModel } = this.props
+    const { game } = this.props
     if (!!!game._id) { return null }
 
     if (this.canJoin()) {
@@ -62,7 +60,7 @@ class Game extends Component {
         <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
         <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
         { game.players.map((player) => player.name) }
-        <TheGameModel />
+        <TheGameModel game={ game } />
       </div>
     )
   }

@@ -26,7 +26,5 @@ module.exports = function(options) {
       name: user.name,
       picks: []
     }];
-
-    hook.createGame = true;
   };
 };

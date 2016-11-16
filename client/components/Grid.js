@@ -2,54 +2,38 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { history } from '../store'
 import Square from './Square'
+import updateGame from '../actions/update-game'
 
 class Grid extends Component {
-  constructor() {
-    super()
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true,
-    }
+  static propTypes = {
+    game: PropTypes.object.isRequired,
+    hasTurn: PropTypes.bool.isRequired,
+    playerSymbol: PropTypes.string.isRequired,
   }
 
   handleClick(i) {
-    const squares = this.state.squares.slice()
-    squares[i] = this.state.xIsNext ? 'X' : 'O'
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext,
-    })
+    const { hasTurn, game, playerSymbol, updateGame } = this.props
+    // TODO: ignore if player not hasTurn
+    if (!hasTurn) { return } 
+    const squares = game.squares.slice(0, i)
+      .concat(playerSymbol)
+      .concat(game.squares.slice(i+1))
+    console.log(squares)
+    updateGame(game, { squares })
   }
 
-  calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-}
-
   renderSquare(i) {
-    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />
+    const { game } = this.props
+    return <Square value={game.squares[i]} onClick={() => this.handleClick(i)} />
   }
 
   render() {
-    const status = 'Next player: X'
+    console.log(this.props)
+    const { hasTurn, playerSymbol } = this.props
+    // const status = 'Next player: X'
     return (
       <div>
-        <div className="status">{status}</div>
+        <div className="status">{hasTurn}</div>
         <div className="grid-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -70,4 +54,13 @@ class Grid extends Component {
   }
 }
 
-export default Grid
+const mapStateToProps = ({ currentUser }, { game }) => {
+  const { turn, players } = game
+
+  return {
+    hasTurn: players[turn] && players[turn].userId === currentUser._id,
+    playerSymbol: turn === 0 ? 'X' : 'O'
+  }
+}
+
+export default connect(mapStateToProps, { updateGame })(Grid)

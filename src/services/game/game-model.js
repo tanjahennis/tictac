@@ -8,10 +8,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const squareSchema = new Schema({
-  squares: { type: String, required: true }
-});
-
 const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
   name: { type: String, required: true },
@@ -19,7 +15,7 @@ const playerSchema = new Schema({
 });
 
 const gameSchema = new Schema({
-  squares: [squareSchema],
+  squares: { type: Array, required: true, 'default': [] },
   players: [playerSchema],
   started: { type: Boolean, required: true, 'default': false },
   winner: { type: Boolean, required: false },

@@ -6,10 +6,11 @@ import Grid from './Grid'
 
 class TheGameModel extends Component {
   render() {
+    console.log(this.props)
     return (
       <div className="game">
         <div className="game-grid">
-          <Grid />
+          <Grid game={ this.props.game }/>
         </div>
       </div>
     );
