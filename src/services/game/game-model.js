@@ -8,18 +8,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const gridSchema = new Schema({
-  squares: []
+const squareSchema = new Schema({
+  squares: { type: String, required: true }
 });
 
 const playerSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
   name: { type: String, required: true },
-  location: []
+  picks: [ Number ]
 });
 
 const gameSchema = new Schema({
-  grid: [gridSchema],
+  squares: [squareSchema],
   players: [playerSchema],
   started: { type: Boolean, required: true, 'default': false },
   winner: { type: Boolean, required: false },
