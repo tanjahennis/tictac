@@ -13,7 +13,7 @@ class GameModel extends BaseModel {
       updatedAt: Date.now,
     };
   }
-
+  //What is this?
   findParams() {
     return {
       query: {
@@ -22,7 +22,7 @@ class GameModel extends BaseModel {
       }
     };
   }
-
+  //What is this?
   constructor(dispatch, onError) {
     super('game', dispatch, onError);
     this.app.configure(feathers.authentication({

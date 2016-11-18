@@ -57,9 +57,9 @@ class Game extends Component {
 
     return(
       <div className="game">
-        <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
-        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
-        { game.players.map((player) => player.name) }
+        {/* <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
+        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p> */}
+        <p>{ game.players.map((player) => player.name) }</p>
         <TheGameModel game={ game } />
       </div>
     )
