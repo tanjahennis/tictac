@@ -1,5 +1,3 @@
-'use strict';
-
 // game-model.js - A mongoose model
 //
 // See http://mongoosejs.com/docs/models.html
