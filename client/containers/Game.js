@@ -36,7 +36,6 @@ class Game extends Component {
     saveGame(game, { players: game.players.concat({
       userId: currentUser._id,
       name: currentUser.name,
-      color: PLAYER_COLORS[game.players.length],
     })})
   }
 
@@ -57,8 +56,8 @@ class Game extends Component {
 
     return(
       <div className="game">
-        {/* <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
-        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p> */}
+        <p>Is player: { this.isPlayer() ? 'Yes' : 'No' }</p>
+        <p>Can join: { this.canJoin() ? 'Yes' : 'No' }</p>
         <p>{ game.players.map((player) => player.name) }</p>
         <TheGameModel game={ game } />
       </div>
